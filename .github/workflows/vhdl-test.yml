@@ -26,8 +26,7 @@ jobs:
 
       - name: Run testbench with waveform dump
         run: |
-          # Run and generate waveform (GHW format)
-          # Even if test fails, we want to keep the waveform
+          # Run testbench, dump waveform, continue on failure to preserve wave
           ghdl -r adder_tb --assert-level=error --wave=wave.ghw || true
 
       - name: Upload waveform for debugging
