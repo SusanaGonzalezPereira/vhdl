@@ -29,8 +29,3 @@ jobs:
           # Run testbench, dump waveform, continue on failure to preserve wave
           ghdl -r adder_tb --assert-level=error --wave=wave.ghw || true
 
-      - name: Upload waveform for debugging
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-waveform
-          path: wave.ghw
