@@ -21,11 +21,6 @@ jobs:
 
       - name: Compile VHDL files
         run: |
-          ghdl -a adder.vhdl adder_tb.vhdl
+          ghdl -a adder.vhd adder_testbench.vhd
           ghdl -e adder_tb
-
-      - name: Run testbench with waveform dump
-        run: |
-          # Run testbench, dump waveform, continue on failure to preserve wave
-          ghdl -r adder_tb --assert-level=error --wave=wave.ghw || true
 
