@@ -41,6 +41,12 @@ begin
         report "Test 3 failed: 10 + 6 /= 16"
         severity error;
 
+        A <= 10; B <= 6;  -- 10 + 6 = 16
+        wait for 10 ns;
+        assert SUM = "10000"
+        report "Test 4 failed: 10 + 6 /= 16"
+        severity error;
+
         report "All tests passed!" severity note;
 
         wait;
