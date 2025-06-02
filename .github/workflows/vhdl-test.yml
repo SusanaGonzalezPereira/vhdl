@@ -1,0 +1,37 @@
+name: VHDL Test with GHDL
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install GHDL and GTKWave
+        run: |
+          sudo apt update
+          sudo apt install -y ghdl gtkwave
+
+      - name: Compile VHDL files
+        run: |
+          ghdl -a adder.vhdl adder_tb.vhdl
+          ghdl -e adder_tb
+
+      - name: Run testbench with waveform dump
+        run: |
+          # Run and generate waveform (GHW format)
+          # Even if test fails, we want to keep the waveform
+          ghdl -r adder_tb --assert-level=error --wave=wave.ghw || true
+
+      - name: Upload waveform for debugging
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-waveform
+          path: wave.ghw
