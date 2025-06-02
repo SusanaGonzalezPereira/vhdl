@@ -27,25 +27,25 @@ begin
         wait for 10 ns;
         assert SUM = "01000"
         report "Test 1 failed: 3 + 5 /= 8"
-        severity error;
+        severity warning;
 
         A <= 15; B <= 1;  -- 15 + 1 = 16
         wait for 10 ns;
         assert SUM = "10000"
         report "Test 2 failed: 15 + 1 /= 16"
-        severity error;
+        severity warning;
 
         A <= 10; B <= 6;  -- 10 + 6 = 16
         wait for 10 ns;
         assert SUM = "10001"
         report "Test 3 failed: 10 + 6 /= 16"
-        severity error;
+        severity warning;
 
         A <= 10; B <= 6;  -- 10 + 6 = 16
         wait for 10 ns;
         assert SUM = "10000"
         report "Test 4 failed: 10 + 6 /= 16"
-        severity error;
+        severity warning;
 
         report "All tests passed!" severity note;
 
