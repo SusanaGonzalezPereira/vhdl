@@ -23,14 +23,14 @@ jobs:
         run: |
           ghdl -a adder.vhd adder_testbench.vhd
           ghdl -e adder_tb
-
+      
       - name: Run testbench with waveform dump
         run: |
-          # Run testbench, dump waveform, continue on failure to preserve wave
-          ghdl -r adder_tb --assert-level=error --wave=wave.ghw || true
+          # Run testbench, dump waveform in VCD format, continue on failure to preserve wave
+          ghdl -r adder_tb --assert-level=error --vcd=wave.vcd || true
 
       - name: Upload waveform for debugging
         uses: actions/upload-artifact@v4
         with:
           name: waveform
-          path: wave.ghw
+          path: wave.vcd
